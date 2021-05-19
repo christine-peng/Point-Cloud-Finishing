@@ -18,12 +18,12 @@
 
 * g.) Save new clipped file ![image](https://user-images.githubusercontent.com/83466109/118746914-e8844400-b80d-11eb-9c11-a6a8946f527f.png)
 
-#### 2. A "noise" filter is automated to filter out unsightly stray points that can throw off the point cloud centroid, making it hard to view online. 
+### 2. A "noise" filter is automated to filter out unsightly stray points that can throw off the point cloud centroid, making it hard to view online. 
 
 After testing out two different filter options, it seems they are pretty similar. The noise filter gives more control but you have to set more parameters!
 
 A little description of each filter: 
-### SOR filter (Tools > Clean > SOR filter)
+#### SOR filter (Tools > Clean > SOR filter)
 - This tool functions to compute the average distance of each point to its neighbors (considering k nearest neighbors for each k is the first parameter). It then rejects the points that are further than the average distance plus the number of standard deviations (second parameter).
 https://www.cloudcompare.org/doc/wiki/index.php?title=SOR_filter
 - After running through various parameters, it seems the parameter will need to be adjusted depending on how much noise is in each individual point cloud. Since the file used to test parameters (forestPointCloud.las) has a large number of sparse points, a parameter as shown below would be best suited to clean up this particular point cloud. 
@@ -39,7 +39,7 @@ cd "C:\Program Files\CloudCompare"
 CloudCompare -O "C:\Users\Christine\Desktop\FYBR\cleanPointClouds\forestPointCloud.las" -C_EXPORT_FMT LAS -SOR 6 1 
 ```
 
-### Noise filter (Tools > Clean > Noise filter)
+#### Noise filter (Tools > Clean > Noise filter)
 * This tool is similar to the SOR filter but considers the distance to the underlying surface rather than distance to neighbors. The algorithm fits locally around each point of the cloud, then removes the point if it's too far away from the point cloud. This filter is very similar to a low pass filter.
 http://www.cloudcompare.org/doc/wiki/index.php?title=Noise_filter
 * Parameters used: input a number of neighbors around each group of points, or specify a ball radius, and input max error (distance of the point to the fitter plane) to decide of a point is rejected or not.
