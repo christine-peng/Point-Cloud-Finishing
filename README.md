@@ -49,8 +49,8 @@ To automate this process and export as a LAS file:
 cd "C:\Program Files\CloudCompare"
 CloudCompare -O "C:\Users\Christine\Desktop\FYBR\cleanPointClouds\forestPointCloud.las" -C_EXPORT_FMT LAS -SOR 6 1 
 ```
-- Number of neighbours specified 
-- Sigma multiplier specified 
+- specify Number of neighbours  
+- specify Sigma multiplier  
 
 #### Noise filter (Tools > Clean > Noise filter)
 * This tool is similar to the SOR filter but considers the distance to the underlying surface rather than distance to neighbors. The algorithm fits locally around each point of the cloud, then removes the point if it's too far away from the point cloud. This filter is very similar to a low pass filter.
@@ -68,3 +68,10 @@ CloudCompare -O "C:\Users\Christine\Desktop\FYBR\cleanPointClouds\forestPointClo
 ```
 - The radius, or spherical neighbourhood is specified (REL)
 - Remove isolated points (RIP) 
+
+### Apply Noise filter + Beauty mask + Export as LAS file (Using Sawmill Point Cloud) 
+![image](https://user-images.githubusercontent.com/83466109/119951918-525cc600-bf51-11eb-8476-b86932b608b5.png)
+```
+cd "C:\Program Files\CloudCompare"
+CloudCompare -O -GLOBAL_SHIFT -653400 -3401500 0 "C:\Users\Christine\Desktop\FYBR\messyPointClouds\SawmillPointCloud.las" -C_EXPORT_FMT LAS -NOISE RADIUS 0.4 REL 1.0 RIP -CROP2D Z 12 261.674983 492.431959 629.045639 492.864675 693.979116 475.130979 705.731322 404.261044 701.787409 83.405928 652.802746 32.880245 175.277298 23.327723 55.555478 121.100196 4.951358 189.498857 4.062920 259.814967 66.842917 366.937263 166.251288 439.070517 261.674983 492.431959
+```
