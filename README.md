@@ -18,6 +18,17 @@
 
 * g.) Save new clipped file ![image](https://user-images.githubusercontent.com/83466109/118746914-e8844400-b80d-11eb-9c11-a6a8946f527f.png)
 
+To automate this process and export as a LAS file: 
+
+```
+cd "C:\Program Files\CloudCompare"
+CloudCompare -O -GLOBAL_SHIFT -519800 -5913100 0 "C:\Users\Christine\Desktop\FYBR\messyPointClouds\forestPointCloud.las" -C_EXPORT_FMT LAS -CROP2D Z 20 857.974454 448.451725 874.370857 350.409992 867.761214 190.557949 854.125220 97.602778 820.199793 64.616813 713.972274 76.104947 595.212652 180.209955 449.533599 325.580762 339.014706 323.318679 268.138876 336.172183 166.540265 404.351828 56.220159 581.983130 28.638806 681.245105 28.357809 705.289047 47.827661 719.001115 615.181086 728.572750 190.804185 700.234016 334.183391 617.489340 699.722966 476.583019 857.974454 448.451725 
+```
+- CROP2D crops all loaded clouds inside a given 2D polygon
+- Specify orthogonal dimension that will be ignored. Since we don't need the Z coordinates, I specified that we ignore Z
+- Number of vertices of the polygon given to me has 20 vertices, which is specified 
+- All 20 vertices' coordinates are specified 
+
 ### 2. A "noise" filter is automated to filter out unsightly stray points that can throw off the point cloud centroid, making it hard to view online. 
 
 After testing out two different filter options, it seems they are pretty similar. The noise filter gives more control but you have to set more parameters!
@@ -38,6 +49,8 @@ To automate this process and export as a LAS file:
 cd "C:\Program Files\CloudCompare"
 CloudCompare -O "C:\Users\Christine\Desktop\FYBR\cleanPointClouds\forestPointCloud.las" -C_EXPORT_FMT LAS -SOR 6 1 
 ```
+- Number of neighbours specified 
+- Sigma multiplier specified 
 
 #### Noise filter (Tools > Clean > Noise filter)
 * This tool is similar to the SOR filter but considers the distance to the underlying surface rather than distance to neighbors. The algorithm fits locally around each point of the cloud, then removes the point if it's too far away from the point cloud. This filter is very similar to a low pass filter.
@@ -53,3 +66,5 @@ To automate this process and export as a LAS file:
 cd "C:\Program Files\CloudCompare"
 CloudCompare -O "C:\Users\Christine\Desktop\FYBR\cleanPointClouds\forestPointCloud.las" -C_EXPORT_FMT LAS -NOISE RADIUS 0.4 REL 1.0 RIP 
 ```
+- The radius, or spherical neighbourhood is specified (REL)
+- Remove isolated points (RIP) 
